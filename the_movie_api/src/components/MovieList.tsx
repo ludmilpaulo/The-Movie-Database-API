@@ -2,48 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Pagination from "./Pagination";
 
 
-function MovieList() {
+function MovieList({data}:{data:any}) {
 
  
 
-  const [movies, setMovies] = useState<any>([{}]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
-
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = movies.slice(firstPostIndex, lastPostIndex);
-
-
-  console.log('Loading', movies.length)
-
- 
-  const getMovies = async () => {
-    try {
-      let res = await fetch(`https://api.themoviedb.org/4/movie/popular?api_key=6802651e847439a9b1d064176b06c639`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      let resJson = await res.json();
-      setMovies(resJson?.results);
-     
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-  useEffect(() => {
-    getMovies();
-  }, []);
-
+  
   return (
     <div className="grid grid-cols-3 gap-4" >
 
-{movies.map((item:any, index:any) => {
+{data.map((item:any, index:any) => {
      
      return(
 
