@@ -1,15 +1,21 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 import MovieListScreen from "./screens/MovieListScreen";
 
 function App() {
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MovieListScreen />} />
-      </Routes>
-    </Router>
+    <>
+  
+    <Navbar fixed={undefined} />
+    <MovieListScreen/>
+    <Footer/>
+  
+  </>
+    
   );
 }
 
