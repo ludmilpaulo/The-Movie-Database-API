@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
-import configureStore from "./redux/store";
 
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 import MovieListScreen from "./screens/MovieListScreen";
-
-const store = configureStore();
+import {store} from "./redux/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <>
-     <ReduxProvider store={store}>
-      <Navbar />
-      <MovieListScreen />
-      <Footer />
-      </ReduxProvider>
+      <Provider store={store}>
+        <Navbar />
+        <MovieListScreen />
+        <Footer />
+      </Provider>
     </>
   );
 }

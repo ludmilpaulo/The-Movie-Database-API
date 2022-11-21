@@ -1,8 +1,10 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import busketReducer from "./slices/basketSlice";
 
-import reducer from "./reducers/index";
-
-export default function configureStore(initialState:any) {
-  const store = createStore(reducer, initialState);
-  return store;
-}
+export const store = configureStore({
+  reducer: {
+    busket: busketReducer,
+    auth: authReducer,
+  },
+});

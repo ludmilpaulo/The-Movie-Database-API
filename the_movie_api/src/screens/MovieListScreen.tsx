@@ -4,11 +4,18 @@ import { MovieItem } from "../components/MovieItem";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 
+interface Movie {
+  id: string;
+  title: string;
+  poster_path: string;
+  release_date: number;
+}
+
 const MovieListScreen = () => {
   const [movieData, setMovieData] = useState([] as any[]);
   const [search, setSearch] = useState("");
-  const [filteredDataSource, setFilteredDataSource] = useState([] as any[]);
-  const [masterDataSource, setMasterDataSource] = useState([] as any[]);
+  const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
+  const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
   const [currentPage, setCurrentPage] = useState(0);
   const [query, setQuery] = useState("");
