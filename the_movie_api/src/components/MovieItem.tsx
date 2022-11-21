@@ -1,127 +1,103 @@
-import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCartItems, selectTotalPrice, updateBusket } from '../redux/slices/basketSlice';
+import React, { useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "react-bootstrap/esm/Button";
-import { title } from "process";
+interface Movie {
+  id: string;
+  title: string;
+  poster_path: string;
+  release_date: number;
+}
 
+export const MovieItem = ({ movie }: { movie: any }) => {
+  const [items, setItems] = useState([]);
 
-export const MovieItem = ({movie}:{movie:any}) => {
+  const [isLoading, setIsLoading] = useState(true);
 
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const [favourites, setFavourites] = useState<Movie[]>([]);
 
-
-  const match = (id: any) => {
-    const resIndex = cartItems.findIndex((item : any) => item.id === id);
-    if (resIndex >= 0) {
-      const menuIndex = cartItems[resIndex].foods.findIndex(
-        (item : any) => item.id === id
-      );
-      if (menuIndex >= 0) return true;
-      return false;
-    }
-    return false;
-  };
-
-  const handleAddRemove = (id: any) => {
-  
-
-  
-
-    const indexFromMovie = movie.findIndex((x:any) => x.id === id);
-    const resIndex = cartItems.findIndex((item:any) => item.id === id);
-    const movieItem = movie[indexFromMovie];
-  
-    //setQty(foodItem.quantity);
-    console.log('foods item',movieItem);
-
-    if (resIndex >= 0) {
-      const menuIndex = cartItems[resIndex].foods.findIndex(
-        (item:any) => item.id === id
-      );
-      if (menuIndex >= 0) {
-        let oldArrays = [...cartItems];
-        let oldfoods = [...oldArrays[resIndex].foods];
-        oldfoods.splice(menuIndex, 1);
-        oldArrays.splice(resIndex, 1);
-        let newArray = [
-          ...oldArrays,
-          { movies: oldfoods},
-        ];
-        console.log('nova array',newArray)
-        dispatch(updateBusket(newArray));
-      } else {
-        let oldArrays = [...cartItems];
-      
-        let newFoodArray = [...oldArrays[resIndex].movies, movieItem ];
-        oldArrays.splice(resIndex, 1);
-       
-        let updatedResArray = [
-          ...oldArrays,
-          { foods: newFoodArray},
-        ];
-        console.log('updated ', updatedResArray)
-        dispatch(updateBusket(updatedResArray));
-      }
+  const addFlights = (movie: Movie) => {
+    if (!favourites.includes(movie)) {
+      console.log("Added from favourites")
+      toast.success("Added to favourites");
+      setFavourites([...favourites, movie]);
     } else {
-      let oldArrays = [...cartItems];
-   
-      let newResFoodArray = [
-        ...oldArrays,
-        {
-          movies: [{ ...movieItem}],
-        },
-      ];
-      dispatch(updateBusket(newResFoodArray));
+      console.log("Removed from favourites")
+      toast.success("Removed from favourites");
+      setFavourites([...favourites.filter((item) => item !== movie)]);
     }
   };
 
-   
-
-
-    return (
-      <>
-        <div className="flex flex-wrap -mx-1 lg:-mx-4">
-          {movie.slice(0, 9).map((movies:any,index:any) => (
-            <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-              <article
-                className="overflow-hidden rounded-lg shadow-lg"
-                key={index}
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${movies.poster_path}`}
-                  alt={`${movies.title} Poster`}
-                  className="block h-auto w-full"
-                />
-  
-                <div className="p-5">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
-                    {movies.title}
-                  </h5>
-  
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    <b>Release date</b>:{movies.release_date}
-                  </p>
-                  {match(movies.id) ? (
-                  <Button
-                    onClick={() => handleAddRemove(movies.id)}
-                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
-                  >
-                    Add To Favorites
-                  </Button>
-                  ) : (
-                    <Button
-                    onClick={() => handleAddRemove(movies.id)}
-                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
-                  >
-                    Remove from Favorites
-                  </Button>
-                  )}
-                </div>
-              </article>
-            </div>
-          ))}
-        </div>
-      </>
-    );
+  const removeFlights = (movie: Movie) => {
+    toast.success("Removed from favourites");
+    setFavourites([...favourites.filter((item) => item !== movie)]);
   };
+
+  console.log('fav',favourites)
+  //if (isLoading) return <p>Loading...</p>;
+
+  let handleSubmit = async (movies: any) => {
+    movies.preventDefault();
+    try {
+      let res = await fetch(
+        "https://webhook.site/87b01ef3-8460-479a-bc89-eb1ce54a8380",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: movies,
+          }),
+        }
+      );
+      let resJson = await res.json();
+
+      if (res.status === 201) {
+        alert("Contact created successfully");
+      } else {
+        alert("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <>
+      <div className="flex flex-wrap -mx-1 lg:-mx-4">
+        {movie.slice(0, 9).map((item: any, index: any) => (
+          <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article
+              className="overflow-hidden rounded-lg shadow-lg"
+              key={index}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                alt={`${item.title} Poster`}
+                className="block h-auto w-full"
+              />
+
+              <div className="p-5">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
+                  {item.title}
+                </h5>
+
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                  <b>Release date</b>:{item.release_date}
+                </p>
+
+                <Button
+                  onClick={() => addFlights(item)}
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
+                >
+                  Add To Favorites
+                </Button>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
