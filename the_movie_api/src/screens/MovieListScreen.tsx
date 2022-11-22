@@ -1,7 +1,8 @@
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
-import { MovieItem } from "../components/MovieItem";
-import ReactPaginate from "react-paginate";
+import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
+import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
 
 interface Movie {
@@ -18,10 +19,12 @@ const MovieListScreen = () => {
   const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [query, setQuery] = useState("");
+  const [favourites, setFavourites] = useState<Movie[]>([]);
+
 
   const [page, setPage] = useState(1);
 
+  console.log('check array ==>', favourites)
   const nextPage = () => {
     setPage(page + 1);
     getMovie();
@@ -35,6 +38,26 @@ const MovieListScreen = () => {
       console.log("page ==>", page);
     }
   };
+
+  const addFavorites = (movie: Movie) => {
+    if (!favourites.includes(movie)) {
+      alert("Added to favourites");
+      setFavourites([...favourites, movie]);
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    } else {
+      alert("Removed from favourites");
+      setFavourites([...favourites.filter((item) => item !== movie)]);
+    }
+  };
+
+  const removeFlights = (movie: Movie) => {
+    alert("Removed from favourites");
+    setFavourites([...favourites.filter((item) => item !== movie)]);
+  };
+
+  
+
+  
 
   const getMovie = async () => {
     try {
@@ -123,7 +146,11 @@ const MovieListScreen = () => {
   }, [movieData]);
 
   return (
+    
+        <div style={divStyle}>
+          <Navbar />
     <div className="container my-12 mx-auto px-4 md:px-12">
+      
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
@@ -150,7 +177,39 @@ const MovieListScreen = () => {
         />
       </div>
       {filteredDataSource.length > 0 && (
-        <MovieItem movie={filteredDataSource} />
+        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+          {filteredDataSource.slice(0, 9).map((item: any, index: any) => (
+            <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+              <article
+                className="overflow-hidden rounded-lg shadow-lg"
+                key={index}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                  alt={`${item.title} Poster`}
+                  className="block h-auto w-full"
+                />
+
+                <div className="p-5">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
+                    {item.title}
+                  </h5>
+
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <b>Release date</b>:{item.release_date}
+                  </p>
+
+                  <Button
+                     onClick={() => addFavorites(item)}
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
+                  >
+                    Add To Favorites
+                  </Button>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
       )}
       <div className="flex items-center justify-center">
         <div
@@ -179,11 +238,22 @@ const MovieListScreen = () => {
           </button>
         </div>
       </div>
+      
     </div>
+    <Footer/>
+    </div>
+   
   );
 };
 
+
+const divStyle = {
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundRepeat: 'noRepeat',
+  //width: "100vw",
+  //height: "100vh",
+  backgroundImage: "url(" + background + ")",
+};
+
 export default MovieListScreen;
-function useStateArray<T>(): [any, any] {
-  throw new Error("Function not implemented.");
-}

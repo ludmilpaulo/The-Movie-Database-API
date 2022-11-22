@@ -17,11 +17,11 @@ export const MovieItem = ({ movie }: { movie: any }) => {
 
   const addFlights = (movie: Movie) => {
     if (!favourites.includes(movie)) {
-      console.log("Added from favourites")
+      console.log("Added from favourites");
       toast.success("Added to favourites");
       setFavourites([...favourites, movie]);
     } else {
-      console.log("Removed from favourites")
+      console.log("Removed from favourites");
       toast.success("Removed from favourites");
       setFavourites([...favourites.filter((item) => item !== movie)]);
     }
@@ -32,7 +32,7 @@ export const MovieItem = ({ movie }: { movie: any }) => {
     setFavourites([...favourites.filter((item) => item !== movie)]);
   };
 
-  console.log('fav',favourites)
+  console.log("fav");
   //if (isLoading) return <p>Loading...</p>;
 
   let handleSubmit = async (movies: any) => {

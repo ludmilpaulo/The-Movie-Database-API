@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -24,13 +25,13 @@ export default function Navbar() {
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
-                <a
+                <Link to={"/fav"}
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
+                 
                 >
                   <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Share</span>
-                </a>
+                  <span className="ml-2">My Favorites </span>
+                </Link>
               </li>
               <li className="nav-item">
                 <a
@@ -38,13 +39,12 @@ export default function Navbar() {
                   href="#pablo"
                 >
                   <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Tweet</span>
+                  <span className="ml-2">Contacts</span>
                 </a>
               </li>
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
                 >
                   <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
                   <span className="ml-2">Pin</span>
@@ -57,3 +57,5 @@ export default function Navbar() {
     </>
   );
 }
+
+
