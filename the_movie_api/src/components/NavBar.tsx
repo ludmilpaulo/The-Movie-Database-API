@@ -24,6 +24,15 @@ export default function Navbar() {
             id="example-navbar-danger"
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <li className="nav-item">
+                <Link to={"/"}
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                 
+                >
+                  <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
+                  <span className="ml-2">List of Movies </span>
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link to={"/fav"}
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"

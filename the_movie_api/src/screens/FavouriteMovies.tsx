@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-
-import FlightCard from "./FlightCard";
-import toast, { Toaster } from "react-hot-toast";
+/* eslint-disable eqeqeq */
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
+import background from "../assets/bg.png";
+import { Button } from "react-bootstrap";
 
 interface Movie {
   id: string;
@@ -11,89 +13,105 @@ interface Movie {
 }
 
 const FavouriteMovies = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Movie[]>([]);
+
+  const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
   const [favourites, setFavourites] = useState<Movie[]>([]);
 
+  const removeFavourites = (movie: Movie) => {
+    alert("Removed from favourites");
+   // setFilteredDataSource([...filteredDataSource.filter((item) => item !== movie)]);
+   // setFavourites([...favourites, movie]);
+   // localStorage.setItem('favourites', JSON.stringify(favourites));
+  };
+
+  
+
+  
+
+  const getMovie = () => {
+   // const saved = localStorage.getItem("favourites");
+    const initial = JSON.parse(window.localStorage.getItem("favourites") || "") 
+    setFilteredDataSource(initial );
+    return initial;  
+  };
+
+  //***************************************************************** */
+
+
+
+
+  //**************************************************************************** */
   useEffect(() => {
-    const url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=6802651e847439a9b1d064176b06c639";
-    // Allows us to intercept an API request so we can cancel anytime - sending signal in fetch will destroy immediately
-    const controller = new AbortController();
-    const { signal } = controller;
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url, { signal }).then((res) => res.json());
-        setData(response.results);
-        setIsLoading(false);
-      } catch (err) {
-        if (err instanceof Error) {
-          if (err.name === "AbortError") {
-            console.log("api request has been cancelled");
-          }
-          console.log(err.name);
-        } else {
-          console.log("This is an unknown error");
-        }
-      }
-    };
-    fetchData();
-    return () => {
-      // cleanup the abort controller
-      controller.abort();
-    };
-  }, []);
 
-  const addFlights = (flight: Movie) => {
-    if (!favourites.includes(flight)) {
-      toast.success("Added to favourites");
-      setFavourites([...favourites, flight]);
-    } else {
-      toast.success("Removed from favourites");
-      setFavourites([...favourites.filter((item) => item !== flight)]);
-    }
-  };
-
-  const removeFlights = (flight: Movie) => {
-    toast.success("Removed from favourites");
-    setFavourites([...favourites.filter((item) => item !== flight)]);
-  };
-
-  if (isLoading) return <p>Loading...</p>;
+    getMovie();
+  }, [filteredDataSource]);
 
   return (
-    <>
-      <FlightCard title="Trending Destination">
-        {data.length &&
-          data?.map((item) => (
-            <div
-              key={item.id}
-              className="destination"
-              onClick={() => addFlights(item)}
-            >
-              <li>{item.title}</li>
-              <button>+</button>
+    
+        <div style={divStyle}>
+          <Navbar />
+    <div className="container my-12 mx-auto px-4 md:px-12">
+      
+      <div className="relative">
+      <div className="flex items-center justify-center">
+        <h1>My Faurite Movies </h1>
+        </div>
+        
+      </div>
+      {filteredDataSource.length > 0 && (
+        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+          {filteredDataSource.slice(0, 9).map((item: any, index: any) => (
+            <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+              <article
+                className="overflow-hidden rounded-lg shadow-lg"
+                key={index}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                  alt={`${item.title} Poster`}
+                  className="block h-auto w-full"
+                />
+
+                <div className="p-5">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
+                    {item.title}
+                  </h5>
+
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <b>Release date</b>:{item.release_date}
+                  </p>
+                
+                  <Button
+                    // onClick={() => removeFavourites(item)}
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
+                  >
+                  Remove From Favourites
+                  </Button>
+                
+                 
+                </div>
+              </article>
             </div>
           ))}
-      </FlightCard>
-      <FlightCard title="My Destination List">
-        {favourites.length ? (
-          favourites?.map((item) => (
-            <div
-              key={item.id}
-              className="destination"
-              onClick={() => removeFlights(item)}
-            >
-              <li>{item.title}</li>
-              <button>-</button>
-            </div>
-          ))
-        ) : (
-          <p>Nothing added to your list yet</p>
-        )}
-      </FlightCard>
-    </>
+        </div>
+      )}
+     
+      
+    </div>
+    <Footer/>
+    </div>
+   
   );
+};
+
+
+const divStyle = {
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundRepeat: 'noRepeat',
+  //width: "100vw",
+  //height: "100vh",
+  backgroundImage: "url(" + background + ")",
 };
 
 export default FavouriteMovies;

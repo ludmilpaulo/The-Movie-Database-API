@@ -21,7 +21,6 @@ const MovieListScreen = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [favourites, setFavourites] = useState<Movie[]>([]);
 
-
   const [page, setPage] = useState(1);
 
   console.log('check array ==>', favourites)
@@ -40,10 +39,12 @@ const MovieListScreen = () => {
   };
 
   const addFavorites = (movie: Movie) => {
+   
     if (!favourites.includes(movie)) {
       alert("Added to favourites");
       setFavourites([...favourites, movie]);
-      localStorage.setItem('favourites', JSON.stringify(favourites));
+      window.localStorage.setItem('favourites', JSON.stringify(favourites));
+    
     } else {
       alert("Removed from favourites");
       setFavourites([...favourites.filter((item) => item !== movie)]);
@@ -53,6 +54,32 @@ const MovieListScreen = () => {
   const removeFlights = (movie: Movie) => {
     alert("Removed from favourites");
     setFavourites([...favourites.filter((item) => item !== movie)]);
+  };
+
+  let handleSubmit = async (movie: Movie) => {
+   // movie.preventDefault();
+    try {
+      let res = await fetch("https://webhook.site/87b01ef3-8460-479a-bc89-eb1ce54a8380", {
+        method: "POST",
+        mode: 'no-cors',
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({movie}),
+      });
+      let resJson = await res.json();
+
+      if (res.status === 201) {
+        alert("Contact created successfully");
+       // navigate("/ContactScreen/");
+       
+      } else {
+        alert("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   
@@ -198,13 +225,15 @@ const MovieListScreen = () => {
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     <b>Release date</b>:{item.release_date}
                   </p>
-
+                
                   <Button
-                     onClick={() => addFavorites(item)}
+                     onClick={() => handleSubmit(item)}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
                   >
-                    Add To Favorites
+                  Add to Favourites
                   </Button>
+                
+                 
                 </div>
               </article>
             </div>
