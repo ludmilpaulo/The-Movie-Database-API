@@ -2,8 +2,15 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="text-center bg-gray-900 text-white">
-      <div className="container px-6 pt-6">
+    <footer
+      className="
+             fixed
+             inset-x-0
+             bottom-0
+             h-12
+             p-0">
+    <div className="text-center bg-gray-900 text-white ">
+      <div className="container px-6 pt-6 ">
         <div className="flex justify-center mb-6">
           <a
             href="#!"
@@ -141,10 +148,11 @@ export default function Footer() {
 
       <div className="text-center p-4">
         © 2022 Copyright:
-        <a className="text-whitehite" href="https://tailwind-elements.com/">
-          Tailwind Elements
+        <a className="text-whitehite" href="https://www.ludmilpaulo.com/">
+          Designed by Ludmil Paulo
         </a>
       </div>
     </div>
+    </footer>
   );
 }

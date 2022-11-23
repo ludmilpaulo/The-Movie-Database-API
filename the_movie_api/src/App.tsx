@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 import FavouriteMovies from "./screens/FavouriteMovies";
+import ContactScreen from "./screens/ContactScreen";
 
 import MovieListScreen from "./screens/MovieListScreen";
 import { store } from "./redux/store";
@@ -16,6 +17,7 @@ function App() {
         <Routes>   
           <Route path="/" element={<MovieListScreen />} />
           <Route path="/fav/" element={<FavouriteMovies />} />
+          <Route path="/contacts/" element={<ContactScreen />} />
         </Routes>
       </Router> 
    

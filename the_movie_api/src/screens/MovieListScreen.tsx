@@ -245,7 +245,7 @@ const MovieListScreen = () => {
           ))}
         </div>
       )}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center divide-y">
         <div
           className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
           role="group"
@@ -272,9 +272,10 @@ const MovieListScreen = () => {
           </button>
         </div>
       </div>
-      
+     
     </div>
     <Footer/>
+  
     </div>
    
   );
