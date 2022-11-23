@@ -14,25 +14,36 @@ interface Movie {
 
 const FavouriteMovies = () => {
 
-  const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
-  const [favourites, setFavourites] = useState<Movie[]>([]);
+    const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
+    const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
-  const removeFavourites = (movie: Movie) => {
-    alert("Removed from favourites");
-   // setFilteredDataSource([...filteredDataSource.filter((item) => item !== movie)]);
-   // setFavourites([...favourites, movie]);
-   // localStorage.setItem('favourites', JSON.stringify(favourites));
-  };
+
 
   
 
-  
 
-  const getMovie = () => {
-   // const saved = localStorage.getItem("favourites");
-    const initial = JSON.parse(window.localStorage.getItem("favourites") || "") 
-    setFilteredDataSource(initial );
-    return initial;  
+  const getMovie = async () => {
+    try {
+      fetch(
+        `http://127.0.0.1:8000/get/`
+      )
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setFilteredDataSource(responseJson?.movie);
+          setMasterDataSource(responseJson?.movie);
+        
+        })
+        .catch(function (error) {
+          console.log(
+            "There has been a problem with your fetch operation: " +
+              error.message
+          );
+          // ADD THIS THROW error
+          throw error;
+        });
+    } catch (e) {
+      alert(e);
+    }
   };
 
   //***************************************************************** */
@@ -54,7 +65,7 @@ const FavouriteMovies = () => {
       
       <div className="relative">
       <div className="flex items-center justify-center">
-        <h1>My Faurite Movies </h1>
+        <h1>My Favourite Movies </h1>
         </div>
         
       </div>

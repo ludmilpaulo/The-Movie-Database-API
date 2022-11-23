@@ -23,7 +23,7 @@ const MovieListScreen = () => {
 
   const [page, setPage] = useState(1);
 
-  console.log('check array ==>', favourites)
+
   const nextPage = () => {
     setPage(page + 1);
     getMovie();
@@ -59,19 +59,24 @@ const MovieListScreen = () => {
   let handleSubmit = async (movie: Movie) => {
    // movie.preventDefault();
     try {
-      let res = await fetch("https://webhook.site/87b01ef3-8460-479a-bc89-eb1ce54a8380", {
+      let res = await fetch("http://127.0.0.1:8000/get/", {
         method: "POST",
-        mode: 'no-cors',
+       // mode: 'no-cors',
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({movie}),
+        body: JSON.stringify({
+          title:movie.title,
+          release_date:movie.release_date,
+          poster_path:movie.poster_path
+        }),
       });
       let resJson = await res.json();
+      console.log("recebido", resJson)
 
-      if (res.status === 201) {
-        alert("Contact created successfully");
+      if (res.status === 200) {
+        alert("Movie successfully Added to Favourite");
        // navigate("/ContactScreen/");
        
       } else {
