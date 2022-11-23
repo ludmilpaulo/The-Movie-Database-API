@@ -47,6 +47,35 @@ const FavouriteMovies = () => {
   };
 
   //***************************************************************** */
+  let handleSubmit = async (movie: Movie) => {
+    // movie.preventDefault();
+     try {
+       let res = await fetch("http://127.0.0.1:8000/get/", {
+         method: "DELETE",
+        // mode: 'no-cors',
+         headers: {
+           Accept: "application/json",
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           id:movie.id
+         }),
+       });
+       let resJson = await res.json();
+       console.log("recebido", resJson)
+ 
+       if (res.status === 201) {
+         alert("Movie successfully Added to Favourite");
+        // navigate("/ContactScreen/");
+        
+       } else {
+         alert("Some error occured");
+       }
+     } catch (err) {
+       console.log(err);
+     }
+   };
+ 
 
 
 
@@ -93,7 +122,7 @@ const FavouriteMovies = () => {
                   </p>
                 
                   <Button
-                    // onClick={() => removeFavourites(item)}
+                     onClick={() => handleSubmit(item)}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
                   >
                   Remove From Favourites

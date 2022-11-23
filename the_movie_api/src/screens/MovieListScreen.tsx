@@ -75,7 +75,7 @@ const MovieListScreen = () => {
       let resJson = await res.json();
       console.log("recebido", resJson)
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         alert("Movie successfully Added to Favourite");
        // navigate("/ContactScreen/");
        

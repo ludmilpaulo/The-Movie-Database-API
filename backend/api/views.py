@@ -22,7 +22,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 @parser_classes([JSONParser, MultiPartParser, FormParser, FileUploadParser])
 def get_fav(request):
     if request.method == 'GET':
@@ -41,17 +41,20 @@ def get_fav(request):
             return Response(movie_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(movie_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    elif request.method == 'DELETE': 
+        data = request.data
+        movie = Movie.objects.get(id=data['id']) 
+        movie.delete() 
+        return Response({'message': 'Movie was deleted successfully form favourites!'}, status=status.HTTP_204_NO_CONTENT)
+    
 
-@api_view(['POST'])
+
+@api_view(['DELETE'])
 def taskUpdate(request):
     data = request.data
-    client = Movie.objects.get(id=data['id'])
-
-
-    client.delete()
-
-    serializer = MovieSerializer(client, many=False)
-    return Response(serializer.data)
+    tutorial = Movie.objects.get(id=data['id']) 
+    tutorial.delete() 
+    return Response({'message': 'Movie was deleted successfully form favourites!'}, status=status.HTTP_204_NO_CONTENT)
 
 
 
