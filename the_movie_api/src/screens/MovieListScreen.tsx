@@ -4,6 +4,7 @@ import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
+import {GrChapterNext, GrChapterPrevious} from "react-icons/gr";
 
 interface Movie {
   id: string;
@@ -19,7 +20,7 @@ const MovieListScreen = () => {
   const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [favourites, setFavourites] = useState<Movie[]>([]);
+
 
   const [page, setPage] = useState(1);
 
@@ -37,24 +38,10 @@ const MovieListScreen = () => {
     }
   };
 
-  const addFavorites = (movie: Movie) => {
-    if (!favourites.includes(movie)) {
-      alert("Added to favourites");
-      setFavourites([...favourites, movie]);
-      window.localStorage.setItem("favourites", JSON.stringify(favourites));
-    } else {
-      alert("Removed from favourites");
-      setFavourites([...favourites.filter((item) => item !== movie)]);
-    }
-  };
-
-  const removeFlights = (movie: Movie) => {
-    alert("Removed from favourites");
-    setFavourites([...favourites.filter((item) => item !== movie)]);
-  };
+ 
 
   let handleSubmit = async (movie: Movie) => {
-    // movie.preventDefault();
+  
     try {
       let res = await fetch("http://127.0.0.1:8000/get/", {
         method: "POST",
@@ -238,26 +225,24 @@ const MovieListScreen = () => {
             className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
             role="group"
           >
-            <button
+            <GrChapterPrevious
               onClick={previousPage}
-              type="button"
-              className="rounded-l inline-block px-6 py-2.5 bg-gray-900 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-900 focus:bg-gray-900 focus:outline-none focus:ring-0 active:bg-gray-900 transition duration-150 ease-in-out"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className=" inline-block px-6 py-2.5 bg-gray-900 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-900 focus:bg-gray-900 focus:outline-none focus:ring-0 active:bg-gray-900 transition duration-150 ease-in-out"
+              className="w-16 h-16"
+              
+            />
+            <label
+            
+              className="inline-block px-6 py-2.5 text-black font-medium text-lg leading-tight"
             >
               {currentPage}
-            </button>
-            <button
+            </label>
+
+            <GrChapterNext
+            className="w-16 h-16"
               onClick={nextPage}
-              type="button"
-              className=" rounded-r inline-block px-6 py-2.5 bg-gray-900 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-900 focus:bg-gray-900 focus:outline-none focus:ring-0 active:bg-gray-900 transition duration-150 ease-in-out"
-            >
-              Next
-            </button>
+              />
+              
+           
           </div>
         </div>
       </div>
