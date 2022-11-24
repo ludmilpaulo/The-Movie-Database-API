@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUseData] = useState();
+
 
   const navigate = useNavigate();
 

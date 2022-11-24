@@ -20,20 +20,29 @@ this project will show the interfaces that will showcase content from The Movie 
 
 - Clone Repo.<br>
 `git clone https://github.com/ludmilpaulo/The-Movie-Database-API.git` 
-```
+
 
 - Make sure to navigate inside the folder The-Movie-Database-API in your command line and run the following command to activate the virtual environment <br> 
 `source my_env/bin/activate`
-```
+
 - Navigate back to the folder The-Movie-Database-API using the command <br>
   `cd.`
-  ```
+ 
 - Navigate in the folder backend with the following command<br>
 `cd backend`
-```
 
-- When inside the backend folder in your terminal run python3 manage.py runserver<br>
+- When inside the backend folder in your terminal run<br> `python3 manage.py runserver`<br>
 
 When the back-end is running we will need other terminal to run the front end in different port would advise using the vs code terminal
-cd into the foldel the_movie_api then run npm start 
+cd into the folder the_movie_api then run npm start 
+
+## Screashoots
+
+![alt textr](./the_movie_api/src/assets/1.png)
+
+![alt textr](./the_movie_api/src/assets/2.png)
+
+![alt textr](./the_movie_api/src/assets/3.png)
+
+![alt textr](./the_movie_api/src/assets/4.png)
 
