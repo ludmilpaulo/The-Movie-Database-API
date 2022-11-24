@@ -12,7 +12,7 @@ interface Movie {
   release_date: number;
 }
 
-const FavouriteMovies = () => {
+const FavoriteMovies = () => {
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
   const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
@@ -130,4 +130,4 @@ const divStyle = {
   backgroundImage: "url(" + background + ")",
 };
 
-export default FavouriteMovies;
+export default FavoriteMovies;

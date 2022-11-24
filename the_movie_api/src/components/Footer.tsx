@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="text-center bg-gray-900 text-white ">
         <div className="text-center p-4">
           © 2022 Copyright:
-          <a className="text-whitehite" href="https://www.ludmilpaulo.com/">
+          <a className="text-white" href="https://www.ludmilpaulo.com/">
             Designed by Ludmil Paulo
           </a>
         </div>

@@ -62,12 +62,12 @@ class UserSignupView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user=serializer.save()
         return Response({
-            "user":UserSerializer(user, context=self.get_serializer_context()).data,
+          #  "user":UserSerializer(user, context=self.get_serializer_context()).data,
           #  "token":Token.objects.get(user=user).key,
             'user_id':user.pk,
             "message":"Conta criada com sucesso",
             'username':user.username,
-            "status":"201"
+            "status":"200"
         })
 
 class UserAuthToken(ObtainAuthToken):
@@ -77,7 +77,7 @@ class UserAuthToken(ObtainAuthToken):
         user=serializer.validated_data['user']
         token, created=Token.objects.get_or_create(user=user)
         return Response({
-            'token':token.key,
+            #'token':token.key,
             'user_id':user.pk,
             'username':user.username,
             'message':"Login Successfully",

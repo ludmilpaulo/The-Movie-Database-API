@@ -1,10 +1,13 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import {AuthContext} from "../components/AuthContext";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
 import {GrChapterNext, GrChapterPrevious} from "react-icons/gr";
+import SignIn from './SignIn';
+
 
 interface Movie {
   id: string;
@@ -12,8 +15,15 @@ interface Movie {
   poster_path: string;
   release_date: number;
 }
+interface User{
+  "user_id": number;
+  "username": string
+  "message": string;
+  "status": number;
+}
 
 const MovieListScreen = () => {
+  const  auth  = useContext(AuthContext);
   const [movieData, setMovieData] = useState([] as any[]);
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
@@ -41,6 +51,10 @@ const MovieListScreen = () => {
  
 
   let handleSubmit = async (movie: Movie) => {
+    console.log("auth==>", auth)
+    if( auth ){
+      alert("Please SignIn to Add Movies to Favorite List")
+    }
   
     try {
       let res = await fetch("http://127.0.0.1:8000/get/", {
@@ -60,10 +74,10 @@ const MovieListScreen = () => {
       console.log("recebido", resJson);
 
       if (res.status === 201) {
-        alert("Movie successfully Added to Favourite");
+        alert("Movie successfully Added to Favorite");
         // navigate("/ContactScreen/");
       } else {
-        alert("Some error occured");
+        alert("Some error occurred");
       }
     } catch (err) {
       console.log(err);
@@ -154,7 +168,7 @@ const MovieListScreen = () => {
   useEffect(() => {
     // searchFilterFunction();
     getMovie();
-  }, [movieData]);
+  }, []);
 
   return (
     <div style={divStyle}>
@@ -212,7 +226,7 @@ const MovieListScreen = () => {
                       onClick={() => handleSubmit(item)}
                       className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-900 dark:focus:ring-blue-800"
                     >
-                      Add to Favourites
+                      Add to Favorites
                     </Button>
                   </div>
                 </article>
