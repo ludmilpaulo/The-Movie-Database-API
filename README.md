@@ -32,6 +32,8 @@ this project will show the interfaces that will showcase content from The Movie 
 `cd backend`
 ```
 
+- When inside the backend folder in your terminal run python3 manage.py runserver<br>
 
-
+When the back-end is running we will need other terminal to run the front end in different port would advise using the vs code terminal
+cd into the foldel the_movie_api then run npm start 
 
