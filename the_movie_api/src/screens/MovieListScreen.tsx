@@ -23,7 +23,7 @@ interface User{
 }
 
 const MovieListScreen = () => {
-  const  auth  = useContext(AuthContext);
+ // const [ auth ]  = useContext(AuthContext);
   const [movieData, setMovieData] = useState([] as any[]);
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
@@ -51,10 +51,15 @@ const MovieListScreen = () => {
  
 
   let handleSubmit = async (movie: Movie) => {
-    console.log("auth==>", auth)
-    if( auth ){
-      alert("Please SignIn to Add Movies to Favorite List")
+
+    const authDataString = await localStorage.getItem("user") 
+   
+    const authData = JSON.parse(authDataString || "");
+
+    if(authData == null){
+      alert("Please log in to Add your favorite Moives")
     }
+    
   
     try {
       let res = await fetch("http://127.0.0.1:8000/get/", {

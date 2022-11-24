@@ -3,6 +3,7 @@ import background from "../assets/bg.png";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 
 
@@ -11,6 +12,7 @@ function SignIn() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [userData, setUseData ] = useState()
 
     const navigate = useNavigate();
     
@@ -36,7 +38,7 @@ function SignIn() {
     
           if (res.status === 200) {
             localStorage.setItem('user', JSON.stringify(resJson));
-            navigate("/SignIn/");
+            navigate("/");
             alert("User logged in now you can Added Movies to Favorite list");
             
           } else {
