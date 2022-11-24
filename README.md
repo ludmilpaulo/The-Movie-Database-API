@@ -1,11 +1,11 @@
 # The-Movie-Database-API
-# Django-React-Typescript-Template
+
 
 Django Backend React Typescript frontend 
 
 
 
-Backend Utilizes Django rest framework and the /api points to backend urls.
+this project will show the interfaces that will showcase content from The Movie Database API
 
 ## Stack
 
@@ -18,18 +18,20 @@ Backend Utilizes Django rest framework and the /api points to backend urls.
 
 [make sure you have downloaded and  installed python in your machine](https://www.python.org/downloads/)
 
-- Clone Repo
-git https://github.com/ludmilpaulo/The-Movie-Database-API.git
+- Clone Repo.<br>
+`git clone https://github.com/ludmilpaulo/The-Movie-Database-API.git` 
 ```
 
-- Make sure to navigate inside the folder The-Movie-Database-API in your command line and run the following command to activate the virtual environment 
-source my_env/bin/activate
+- Make sure to navigate inside the folder The-Movie-Database-API in your command line and run the following command to activate the virtual environment <br> 
+`source my_env/bin/activate`
 ```
-- Navigate back to the folder The-Movie-Database-API using the command
-  cd..
+- Navigate back to the folder The-Movie-Database-API using the command <br>
+  `cd.`
   ```
--Navigate in the folder backend with the following command
-cd backend
+- Navigate in the folder backend with the following command<br>
+`cd backend`
 ```
+
+
 
 
