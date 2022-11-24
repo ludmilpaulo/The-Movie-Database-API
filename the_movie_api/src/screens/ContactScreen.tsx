@@ -2,10 +2,10 @@ import React from "react";
 import background from "../assets/bg.png";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
-import {FiPhoneCall} from "react-icons/fi";
-import {MdOutlineMarkEmailUnread} from "react-icons/md";
-import {FcGlobe} from "react-icons/fc";
-import {AiOutlineGithub} from "react-icons/ai";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdOutlineMarkEmailUnread } from "react-icons/md";
+import { FcGlobe } from "react-icons/fc";
+import { AiOutlineGithub } from "react-icons/ai";
 
 const ContactScreen = () => {
   return (
@@ -28,9 +28,7 @@ const ContactScreen = () => {
                       <div className="flex items-start">
                         <div className="shrink-0">
                           <div className="p-4 bg-gray-900 rounded-md shadow-md w-14 h-14 flex items-center justify-center">
-                           
-                             <FiPhoneCall  className="w-12 h-12  text-white"/>
-                           
+                            <FiPhoneCall className="w-12 h-12  text-white" />
                           </div>
                         </div>
                         <div className="grow ml-6">
@@ -45,16 +43,12 @@ const ContactScreen = () => {
                       <div className="flex items-start">
                         <div className="shrink-0">
                           <div className="p-4 bg-gray-900 rounded-md shadow-md w-14 h-14 flex items-center justify-center">
-                            <MdOutlineMarkEmailUnread
-                            className="w-12 h-12  text-white"
-                            />
-                              
+                            <MdOutlineMarkEmailUnread className="w-12 h-12  text-white" />
                           </div>
                         </div>
                         <div className="grow ml-6">
                           <p className="font-bold mb-1">Email</p>
                           <p className="text-gray-500">ludmilpaulo@gmail.com</p>
-                          
                         </div>
                       </div>
                     </div>
@@ -63,10 +57,9 @@ const ContactScreen = () => {
                       <div className="flex align-start">
                         <div className="shrink-0">
                           <div className="p-4 bg-gray-900 rounded-md shadow-md w-14 h-14 flex items-center justify-center">
-                            <AiOutlineGithub className="w-12 h-12  text-white"/>
+                            <AiOutlineGithub className="w-12 h-12  text-white" />
                           </div>
                         </div>
-                       
                       </div>
                     </div>
 
@@ -74,7 +67,7 @@ const ContactScreen = () => {
                       <div className="flex align-start">
                         <div className="shrink-0">
                           <div className="p-4 bg-gray-900 rounded-md shadow-md w-14 h-14 flex items-center justify-center">
-                            <FcGlobe className="w-12 h-12  text-white"/>
+                            <FcGlobe className="w-12 h-12  text-white" />
                           </div>
                         </div>
                         <div className="grow ml-6">
@@ -132,9 +125,11 @@ const ContactScreen = () => {
       </div>
 
       <div className="absolute inset-x-0 bottom-0 w-full...">
-      <iframe 
-      className= 'w-full'
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.8291920316265!2d18.486413015477428!3d-33.91979542913943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5c5a4231e7ef%3A0x17fabbb3078a1cee!2s21%20Royal%20Rd%2C%20Maitland%2C%20Cape%20Town%2C%207405!5e0!3m2!1sen!2sza!4v1669236841060!5m2!1sen!2sza"  height="300"></iframe>
+        <iframe
+          className="w-full"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.8291920316265!2d18.486413015477428!3d-33.91979542913943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5c5a4231e7ef%3A0x17fabbb3078a1cee!2s21%20Royal%20Rd%2C%20Maitland%2C%20Cape%20Town%2C%207405!5e0!3m2!1sen!2sza!4v1669236841060!5m2!1sen!2sza"
+          height="300"
+        ></iframe>
       </div>
 
       <Footer />

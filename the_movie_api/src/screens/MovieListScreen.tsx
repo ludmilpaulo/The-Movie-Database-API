@@ -1,13 +1,12 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect, useContext } from "react";
-import {AuthContext} from "../components/AuthContext";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
-import {GrChapterNext, GrChapterPrevious} from "react-icons/gr";
-import SignIn from './SignIn';
-
+import { GrChapterNext, GrChapterPrevious } from "react-icons/gr";
+import SignIn from "./SignIn";
 
 interface Movie {
   id: string;
@@ -15,22 +14,21 @@ interface Movie {
   poster_path: string;
   release_date: number;
 }
-interface User{
-  "user_id": number;
-  "username": string
-  "message": string;
-  "status": number;
+interface User {
+  user_id: number;
+  username: string;
+  message: string;
+  status: number;
 }
 
 const MovieListScreen = () => {
- // const [ auth ]  = useContext(AuthContext);
+  const navigate = useNavigate();
   const [movieData, setMovieData] = useState([] as any[]);
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
   const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
   const [currentPage, setCurrentPage] = useState(0);
-
 
   const [page, setPage] = useState(1);
 
@@ -48,44 +46,43 @@ const MovieListScreen = () => {
     }
   };
 
- 
-
   let handleSubmit = async (movie: Movie) => {
+    const authDataString = localStorage.getItem("user");
 
-    const authDataString = await localStorage.getItem("user") 
-   
-    const authData = JSON.parse(authDataString || "");
+    //const authData = JSON.parse(authDataString || "");
 
-    if(authData == null){
-      alert("Please log in to Add your favorite Moives")
-    }
-    
-  
-    try {
-      let res = await fetch("http://127.0.0.1:8000/get/", {
-        method: "POST",
-        // mode: 'no-cors',
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: movie.title,
-          release_date: movie.release_date,
-          poster_path: movie.poster_path,
-        }),
-      });
-      let resJson = await res.json();
-      console.log("recebido", resJson);
+    console.log("new ndata==>>", authDataString);
 
-      if (res.status === 201) {
-        alert("Movie successfully Added to Favorite");
-        // navigate("/ContactScreen/");
-      } else {
-        alert("Some error occurred");
+    if (authDataString === null) {
+      alert("Please log in to Add your favorite Movie");
+      navigate("/SignIn/");
+    } else {
+      try {
+        let res = await fetch("http://127.0.0.1:8000/get/", {
+          method: "POST",
+          // mode: 'no-cors',
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: movie.title,
+            release_date: movie.release_date,
+            poster_path: movie.poster_path,
+          }),
+        });
+        let resJson = await res.json();
+        console.log("recebido", resJson);
+
+        if (res.status === 201) {
+          alert("Movie successfully Added to Favorite");
+          // navigate("/ContactScreen/");
+        } else {
+          alert("Some error occurred");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -244,24 +241,12 @@ const MovieListScreen = () => {
             className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
             role="group"
           >
-            <GrChapterPrevious
-              onClick={previousPage}
-              className="w-16 h-16"
-              
-            />
-            <label
-            
-              className="inline-block px-6 py-2.5 text-black font-medium text-lg leading-tight"
-            >
+            <GrChapterPrevious onClick={previousPage} className="w-16 h-16" />
+            <label className="inline-block px-6 py-2.5 text-black font-medium text-lg leading-tight">
               {currentPage}
             </label>
 
-            <GrChapterNext
-            className="w-16 h-16"
-              onClick={nextPage}
-              />
-              
-           
+            <GrChapterNext className="w-16 h-16" onClick={nextPage} />
           </div>
         </div>
       </div>

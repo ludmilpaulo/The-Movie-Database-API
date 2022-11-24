@@ -1,52 +1,40 @@
-import React, { useContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from "react";
 
-interface User{
-        "user_id": number;
-        "username": string
-        "message": string;
-        "status": number;
-    }
-
-interface IProps {
-children: React.ReactNode;
+interface User {
+  user_id: number;
+  username: string;
+  message: string;
+  status: number;
 }
 
-
-
+interface IProps {
+  children: React.ReactNode;
+}
 
 // Create a context
 const AuthContext = React.createContext({});
 
-
-const AuthProvider = ({ children } : IProps) => {
-  const [auth, setAuthState] = useState<any>({});
-
-  
+const AuthProvider = ({ children }: IProps) => {
+  const [auth, setAuthState] = useState<any>(null);
 
   // Get current auth state from AsyncStorage
   const getAuthState = async () => {
-   
-      const authDataString = await localStorage.getItem("user") 
-   
-      const authData = JSON.parse(authDataString || "");
-  
-      setAuthState(authData);
+    const authDataString = await localStorage.getItem("user");
 
-      console.log("auth ",auth)
- 
-    
+    const authData = JSON.parse(authDataString || "");
+
+    setAuthState(authData);
+
+    console.log("auth ", auth);
   };
 
-  // Set current auth state in AsyncStorage 
+  // Set current auth state in AsyncStorage
   useEffect(() => {
     getAuthState();
-  
-  }, [auth]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{auth}}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ auth }}>{children}</AuthContext.Provider>
   );
 };
 
