@@ -12,11 +12,13 @@ interface User {
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [user, setUser] = useState<User>();
 
   const logOut = () => {
     localStorage.removeItem("user");
+    navigate("/");
   };
 
   const getAuthState = async () => {
