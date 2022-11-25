@@ -151,10 +151,15 @@ const MovieListScreen = () => {
       )
         .then((response) => response.json())
         .then((responseJson) => {
+          console.log("debug", responseJson?.results)
+          if(responseJson?.results===undefined){
+            alert("No movies found ")
+            navigate("/");
+          }else{
           setMovieData(responseJson?.results);
           setFilteredDataSource(responseJson?.results);
           setMasterDataSource(responseJson?.results);
-          setCurrentPage(responseJson?.page);
+          setCurrentPage(responseJson?.page);}
         })
         .catch(function (error) {
           navigate("/");
