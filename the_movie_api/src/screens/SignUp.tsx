@@ -79,7 +79,6 @@ function SignUp() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 aria-label="enter email address"
-               
                 type="text"
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
               />
@@ -92,7 +91,6 @@ function SignUp() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 aria-label="enter email address"
-              
                 type="email"
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
               />
@@ -106,7 +104,6 @@ function SignUp() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   aria-label="enter Password"
-               
                   type="password"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                 />

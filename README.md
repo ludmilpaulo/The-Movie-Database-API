@@ -4,7 +4,6 @@
 Django Backend React Typescript frontend 
 
 
-
 this project will show the interfaces that will showcase content from The Movie Database API
 
 ## Stack
@@ -16,7 +15,8 @@ this project will show the interfaces that will showcase content from The Movie 
 
 # Setup
 
-[make sure you have downloaded and  installed python in your machine](https://www.python.org/downloads/)
+[make sure you have downloaded and  installed Python in your machine](https://www.python.org/downloads/)<br>
+[make sure you have downloaded and  installed NodeJs in your machine](https://nodejs.org/en/)<br>
 
 - Clone Repo.<br>
 `git clone https://github.com/ludmilpaulo/The-Movie-Database-API.git` 
@@ -26,15 +26,15 @@ this project will show the interfaces that will showcase content from The Movie 
 `source my_env/bin/activate`
 
 - Navigate back to the folder The-Movie-Database-API using the command <br>
-  `cd.`
+  `cd..`
  
 - Navigate in the folder backend with the following command<br>
 `cd backend`
 
 - When inside the backend folder in your terminal run<br> `python3 manage.py runserver`<br>
 
-When the back-end is running we will need other terminal to run the front end in different port would advise using the vs code terminal
-cd into the folder the_movie_api then run npm start 
+When the back-end is running we will need other terminal to run the front end in different port would advise using the vs code terminal<br>
+cd into the folder the_movie_api then<br> run npm start <br>
 
 ## Screashoots
 

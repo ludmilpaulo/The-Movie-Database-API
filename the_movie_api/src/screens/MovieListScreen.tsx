@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
 import { GrChapterNext, GrChapterPrevious } from "react-icons/gr";
-import SignIn from "./SignIn";
+import { FiSearch } from "react-icons/fi";
+
 
 interface Movie {
   id: string;
@@ -32,6 +33,9 @@ const MovieListScreen = () => {
 
   const [page, setPage] = useState(1);
 
+  console.log("new ndata==>>", search);
+
+  
   const nextPage = () => {
     setPage(page + 1);
     getMovie();
@@ -51,8 +55,7 @@ const MovieListScreen = () => {
 
     //const authData = JSON.parse(authDataString || "");
 
-    console.log("new ndata==>>", authDataString);
-
+   
     if (authDataString === null) {
       alert("Please log in to Add your favorite Movie");
       navigate("/SignIn/");
@@ -113,14 +116,38 @@ const MovieListScreen = () => {
 
   //***************************************************************** */
 
-  const searchMovie = (e: any) => {
-    e.preventDefault();
+  let handle = async (e:any) => {
+    try {
+      let res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=6802651e847439a9b1d064176b06c639&query=${e.target.value}`, {
+        method: "GET",
+      });
+      let resJson = await res.json();
+      console.log("recebido", resJson);
+
+      if (res.status === 200) {
+        setFilteredDataSource(resJson?.results);
+        setMasterDataSource(resJson?.results);
+        setCurrentPage(resJson?.page);
+        
+        //navigate("/");
+      } else {
+        alert(resJson);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  const searchMovie = (e:any) => {
+   // e.preventDefault();
 
     setSearch(e.target.value);
 
     try {
       fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=6802651e847439a9b1d064176b06c639&language=en-US&query=${e.target.value}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=6802651e847439a9b1d064176b06c639&query=${e.target.value}`
       )
         .then((response) => response.json())
         .then((responseJson) => {
@@ -130,10 +157,7 @@ const MovieListScreen = () => {
           setCurrentPage(responseJson?.page);
         })
         .catch(function (error) {
-          console.log(
-            "There has been a problem with your fetch operation: " +
-              error.message
-          );
+          navigate("/");
           // ADD THIS THROW error
           throw error;
         });
@@ -143,29 +167,9 @@ const MovieListScreen = () => {
   };
 
   ///******************************Search ************************* */
-  const searchFilterFunction = (e: string) => {
-    console.log("texto", e);
-    // Check if searched text is not blank
-    if (e) {
-      // Inserted text is not blank
-      // Filter the masterDataSource and update FilteredDataSource
-      const newData = masterDataSource.filter(function (item: any) {
-        // Applying filter for the inserted text in search bar
-        const itemData = item.title
-          ? item.title.toUpperCase()
-          : "".toUpperCase();
-        const textData = e.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredDataSource(newData);
-      setSearch(e);
-    } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with MovieData
-      setFilteredDataSource(masterDataSource);
-      setSearch(e);
-    }
-  };
+  const changeHandler=(e:any)=>{
+    setSearch(e.target.value);
+  }
   //**************************************************************************** */
   useEffect(() => {
     // searchFilterFunction();
@@ -175,36 +179,22 @@ const MovieListScreen = () => {
   return (
     <div style={divStyle}>
       <Navbar />
-      <div className="container my-12 mx-auto px-4 md:px-12">
+      <div className="container px-4 mx-auto my-12 md:px-12">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
+            <FiSearch ></FiSearch>
           </div>
           <input
             value={search}
             className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search Mockups, Logos..."
-            onChange={(e) => searchFilterFunction(e.target.value)}
+            placeholder="Search Movies..."
+            onChange={searchMovie}
           />
         </div>
         {filteredDataSource.length > 0 && (
           <div className="flex flex-wrap -mx-1 lg:-mx-4">
             {filteredDataSource.slice(0, 9).map((item: any, index: any) => (
-              <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+              <div className="w-full px-1 my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
                 <article
                   className="overflow-hidden rounded-lg shadow-lg"
                   key={index}
@@ -212,7 +202,7 @@ const MovieListScreen = () => {
                   <img
                     src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                     alt={`${item.title} Poster`}
-                    className="block h-auto w-full"
+                    className="block w-full h-auto"
                   />
 
                   <div className="p-5">
