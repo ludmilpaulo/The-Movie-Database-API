@@ -3,14 +3,24 @@
 
 Django Backend React Typescript frontend 
 
+this project will show the interfaces that will showcase content from The Movie Database API <br>
 
-this project will show the interfaces that will showcase content from The Movie Database API
+Live Demo can be viewed at https://movie-ca9d2.web.app/
 
 ## Stack
 
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
 - [Django](https://www.djangoproject.com/) - Django makes it easier to build better web apps more quickly and with less code.
 - [Typescript](https://www.typescriptlang.org/) - JavaScript with syntax for types.
+
+# Features
+* Display List of Movies
+* Add Favorite movies
+* Sin-In and Sin-Up
+* Contact Page
+* Google Map
+* Social Media links
+
 
 
 # Setup
