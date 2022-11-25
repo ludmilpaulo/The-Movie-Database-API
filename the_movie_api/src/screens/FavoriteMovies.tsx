@@ -18,7 +18,7 @@ const FavoriteMovies = () => {
 
   const getMovie = async () => {
     try {
-      fetch(`http://127.0.0.1:8000/get/`)
+      fetch(`https://maindo.pythonanywhere.com/get/`)
         .then((response) => response.json())
         .then((responseJson) => {
           setFilteredDataSource(responseJson?.movie);
@@ -41,7 +41,7 @@ const FavoriteMovies = () => {
   let handleSubmit = async (movie: Movie) => {
     // movie.preventDefault();
     try {
-      let res = await fetch("http://127.0.0.1:8000/get/", {
+      let res = await fetch("https://maindo.pythonanywhere.com/get/", {
         method: "DELETE",
         // mode: 'no-cors',
         headers: {
@@ -74,7 +74,7 @@ const FavoriteMovies = () => {
   return (
     <div style={divStyle}>
       <Navbar />
-      <div className="container my-12 mx-auto px-4 md:px-12">
+      <div className="container px-4 mx-auto my-12 md:px-12">
         <div className="relative">
           <div className="flex items-center justify-center">
             <h1>My Favourite Movies </h1>
@@ -83,7 +83,7 @@ const FavoriteMovies = () => {
         {filteredDataSource.length > 0 && (
           <div className="flex flex-wrap -mx-1 lg:-mx-4">
             {filteredDataSource.slice(0, 9).map((item: any, index: any) => (
-              <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+              <div className="w-full px-1 my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
                 <article
                   className="overflow-hidden rounded-lg shadow-lg"
                   key={index}
@@ -91,7 +91,7 @@ const FavoriteMovies = () => {
                   <img
                     src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                     alt={`${item.title} Poster`}
-                    className="block h-auto w-full"
+                    className="block w-full h-auto"
                   />
 
                   <div className="p-5">

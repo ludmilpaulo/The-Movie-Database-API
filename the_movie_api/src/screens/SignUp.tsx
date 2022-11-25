@@ -13,7 +13,7 @@ function SignUp() {
 
   let handleSubmit = async () => {
     try {
-      let res = await fetch("http://127.0.0.1:8000/signup/", {
+      let res = await fetch("https://maindo.pythonanywhere.com/signup/", {
         method: "POST",
         // mode: 'no-cors',
         headers: {
@@ -28,14 +28,14 @@ function SignUp() {
         }),
       });
       let resJson = await res.json();
-      console.log("recebido", resJson);
+      
 
       if (res.status === 200) {
         alert("Account Created Now you Can Add your favorite Movies");
         localStorage.setItem("user", JSON.stringify(resJson));
         navigate("/");
       } else {
-        alert(resJson.username);
+        alert(Object.values(resJson));
       }
     } catch (err) {
       console.log(err);
@@ -45,9 +45,9 @@ function SignUp() {
   return (
     <div style={divStyle}>
       <Navbar />
-      <div className="h-full bg-gradient-to-tl  to-indigo-900 w-full py-16 px-4">
+      <div className="w-full h-full px-4 py-16 bg-gradient-to-tl to-indigo-900">
         <div className="flex flex-col items-center justify-center">
-          <div className=" shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
+          <div className="w-full p-10 mt-16 rounded shadow lg:w-1/3 md:w-1/2">
             <p
               tabIndex={0}
               role="heading"
@@ -57,13 +57,13 @@ function SignUp() {
               Create your account
             </p>
             <Link to={"/SignIn/"}>
-              <p className="text-sm mt-4 font-medium leading-none text-gray-500">
+              <p className="mt-4 text-sm font-medium leading-none text-gray-500">
                 If you have account?{" "}
                 <span
                   tabIndex={0}
                   role="link"
                   aria-label="Sign up here"
-                  className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
+                  className="text-sm font-medium leading-none text-gray-800 underline cursor-pointer"
                 >
                   {" "}
                   Sign In here
@@ -80,7 +80,7 @@ function SignUp() {
                 onChange={(e) => setUsername(e.target.value)}
                 aria-label="enter email address"
                 type="text"
-                className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
               />
             </div>
             <div>
@@ -92,10 +92,10 @@ function SignUp() {
                 onChange={(e) => setEmail(e.target.value)}
                 aria-label="enter email address"
                 type="email"
-                className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
               />
             </div>
-            <div className="mt-6  w-full">
+            <div className="w-full mt-6">
               <label className="text-sm font-medium leading-none text-gray-800">
                 Password
               </label>
@@ -105,7 +105,7 @@ function SignUp() {
                   onChange={(e) => setPassword(e.target.value)}
                   aria-label="enter Password"
                   type="password"
-                  className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                  className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
                 />
                 <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                   <svg
@@ -128,7 +128,7 @@ function SignUp() {
                 onClick={handleSubmit}
                 role="button"
                 aria-label="create my account"
-                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none  bg-gray-900 border rounded hover:bg-indigo-600 py-4 w-full"
+                className="w-full py-4 text-sm font-semibold leading-none text-white bg-gray-900 border rounded focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none hover:bg-indigo-600"
               >
                 Create my account
               </button>

@@ -13,7 +13,7 @@ const ContactScreen = () => {
   return (
     <div style={divStyle}>
       <Navbar />
-      <div className="container px-4 mx-auto my-12 md:px-12">
+      <div className="container px-4 mx-auto">
         <h1>
           <p className="text-center underline hover:decoration-wavy">
             Ludmil Paulo Samuel Avelino
@@ -21,11 +21,8 @@ const ContactScreen = () => {
         </h1>
 
         <div className="container px-6 mx-auto my-24">
-          <section className="mb-32 text-gray-800">
-            <div className="block rounded-lg ">
-              <div className="flex flex-wrap items-center">
-                <div className="w-full grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-8/12">
-                <div className="grid grid-cols-2 gap-4 place-content-evenly h-48 ...">
+          
+                <div className="grid grid-cols-3 gap-4 place-content-evenly h-48 ...">
                     
                   <a href="tel:+27842368752">
                     <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
@@ -113,10 +110,6 @@ const ContactScreen = () => {
 
                   </div>
                   
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
 

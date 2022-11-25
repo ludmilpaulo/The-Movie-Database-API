@@ -13,7 +13,7 @@ function SignIn() {
 
   let handleSubmit = async () => {
     try {
-      let res = await fetch("http://127.0.0.1:8000/login/", {
+      let res = await fetch("https://maindo.pythonanywhere.com/login/", {
         method: "POST",
         // mode: 'no-cors',
         headers: {
@@ -33,7 +33,7 @@ function SignIn() {
         navigate("/");
         alert("User logged in now you can Added Movies to Favorite list");
       } else {
-        alert(resJson.username);
+        alert(resJson.non_field_errors);
       }
     } catch (err) {
       console.log(err);
@@ -43,9 +43,9 @@ function SignIn() {
   return (
     <div style={divStyle}>
       <Navbar />
-      <div className="h-full bg-gradient-to-tl  to-indigo-900 w-full py-16 px-4">
+      <div className="w-full h-full px-4 py-16 bg-gradient-to-tl to-indigo-900">
         <div className="flex flex-col items-center justify-center">
-          <div className=" shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
+          <div className="w-full p-10 mt-16 rounded shadow lg:w-1/3 md:w-1/2">
             <p
               tabIndex={0}
               aria-label="Login to your account"
@@ -54,13 +54,13 @@ function SignIn() {
               Login to your account
             </p>
             <Link to={"/SignUp/"}>
-              <p className="text-sm mt-4 font-medium leading-none text-gray-500">
+              <p className="mt-4 text-sm font-medium leading-none text-gray-500">
                 Don't have account?{" "}
                 <span
                   tabIndex={0}
                   role="link"
                   aria-label="Sign up here"
-                  className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
+                  className="text-sm font-medium leading-none text-gray-800 underline cursor-pointer"
                 >
                   {" "}
                   Sign up here
@@ -76,10 +76,10 @@ function SignIn() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 type="email"
-                className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
               />
             </div>
-            <div className="mt-6  w-full">
+            <div className="w-full mt-6">
               <label className="text-sm font-medium leading-none text-gray-800">
                 Password
               </label>
@@ -88,7 +88,7 @@ function SignIn() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
-                  className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                  className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
                 />
                 <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                   <svg
@@ -111,7 +111,7 @@ function SignIn() {
                 onClick={handleSubmit}
                 role="button"
                 aria-label="create my account"
-                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none  bg-gray-900 border rounded hover:bg-indigo-600 py-4 w-full"
+                className="w-full py-4 text-sm font-semibold leading-none text-white bg-gray-900 border rounded focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none hover:bg-indigo-600"
               >
                 Login to my account
               </button>

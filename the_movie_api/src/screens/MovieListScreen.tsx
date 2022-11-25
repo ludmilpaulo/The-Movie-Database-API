@@ -61,7 +61,7 @@ const MovieListScreen = () => {
       navigate("/SignIn/");
     } else {
       try {
-        let res = await fetch("http://127.0.0.1:8000/get/", {
+        let res = await fetch("https://maindo.pythonanywhere.com/get/", {
           method: "POST",
           // mode: 'no-cors',
           headers: {
