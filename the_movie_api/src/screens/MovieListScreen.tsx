@@ -37,9 +37,14 @@ const MovieListScreen = () => {
 
   
   const nextPage = () => {
+    if(page === 6){
+      setPage(1)
+    }
+    else{
     setPage(page + 1);
     getMovie();
     console.log("page ==>", page);
+  }
   };
 
   const previousPage = () => {
