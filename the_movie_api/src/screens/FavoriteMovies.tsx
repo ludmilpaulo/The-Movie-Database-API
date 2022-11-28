@@ -5,6 +5,13 @@ import Footer from "../components/Footer";
 import background from "../assets/bg.png";
 import { Button } from "react-bootstrap";
 
+interface User {
+  user_id: number;
+  username: string;
+  message: string;
+  status: number;
+}
+
 interface Movie {
   id: string;
   title: string;
@@ -14,15 +21,29 @@ interface Movie {
 
 const FavoriteMovies = () => {
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
-  const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
 
+
+  
+  
   const getMovie = async () => {
+    const authDataString = localStorage.getItem("user");
+
+    const authData = JSON.parse(authDataString || "");
+
     try {
-      fetch(`https://maindo.pythonanywhere.com/get/`)
+      fetch(`https://maindo.pythonanywhere.com/movies/`,{
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id:authData.user_id,
+        }),
+      })
         .then((response) => response.json())
         .then((responseJson) => {
           setFilteredDataSource(responseJson?.movie);
-          setMasterDataSource(responseJson?.movie);
         })
         .catch(function (error) {
           console.log(

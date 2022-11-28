@@ -9,6 +9,7 @@ import { GrChapterNext, GrChapterPrevious } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
 
 
+
 interface Movie {
   id: string;
   title: string;
@@ -24,41 +25,50 @@ interface User {
 
 const MovieListScreen = () => {
   const navigate = useNavigate();
-  const [movieData, setMovieData] = useState([] as any[]);
+
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
-  const [masterDataSource, setMasterDataSource] = useState<Movie[]>([]);
+
 
   const [currentPage, setCurrentPage] = useState(0);
 
   const [page, setPage] = useState(1);
 
-  console.log("new ndata==>>", search);
+
 
   
   const nextPage = () => {
-    if(page === 6){
+    if(page === 0){
+      setPage(1)
+    }
+    if(page >= 6){
       setPage(1)
     }
     else{
     setPage(page + 1);
     getMovie();
-    console.log("page ==>", page);
+    console.log("page up ==>", page);
   }
   };
 
   const previousPage = () => {
-    if (page != 1) {
+    if(page == 6){
+      setPage(1)
+    }
+    if (page >= 1) {
       setPage(page - 1);
       getMovie();
-      console.log("page ==>", page);
+      console.log("page down ==>", page);
+    }
+    if(page === 0){
+      setPage(5)
     }
   };
 
   let handleSubmit = async (movie: Movie) => {
     const authDataString = localStorage.getItem("user");
 
-    //const authData = JSON.parse(authDataString || "");
+    const authData = JSON.parse(authDataString || "");
 
    
     if (authDataString === null) {
@@ -77,6 +87,7 @@ const MovieListScreen = () => {
             title: movie.title,
             release_date: movie.release_date,
             poster_path: movie.poster_path,
+            user: authData.user_id
           }),
         });
         let resJson = await res.json();
@@ -101,9 +112,9 @@ const MovieListScreen = () => {
       )
         .then((response) => response.json())
         .then((responseJson) => {
-          setMovieData(responseJson?.results);
+        
           setFilteredDataSource(responseJson?.results);
-          setMasterDataSource(responseJson?.results);
+      
           setCurrentPage(responseJson?.page);
         })
         .catch(function (error) {
@@ -131,7 +142,6 @@ const MovieListScreen = () => {
 
       if (res.status === 200) {
         setFilteredDataSource(resJson?.results);
-        setMasterDataSource(resJson?.results);
         setCurrentPage(resJson?.page);
         
         //navigate("/");
@@ -161,9 +171,9 @@ const MovieListScreen = () => {
             alert("No movies found ")
             navigate("/");
           }else{
-          setMovieData(responseJson?.results);
+     
           setFilteredDataSource(responseJson?.results);
-          setMasterDataSource(responseJson?.results);
+       
           setCurrentPage(responseJson?.page);}
         })
         .catch(function (error) {
@@ -176,10 +186,7 @@ const MovieListScreen = () => {
     }
   };
 
-  ///******************************Search ************************* */
-  const changeHandler=(e:any)=>{
-    setSearch(e.target.value);
-  }
+  
   //**************************************************************************** */
   useEffect(() => {
     // searchFilterFunction();

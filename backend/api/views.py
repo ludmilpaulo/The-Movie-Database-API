@@ -24,16 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
 @api_view(['GET', 'POST', 'DELETE'])
 @parser_classes([JSONParser, MultiPartParser, FormParser, FileUploadParser])
 def get_fav(request):
-    if request.method == 'GET':
-        movie = MovieSerializer(
-            Movie.objects.all().order_by('-title'),
-            many=True,
-            context={
-                "request": request
-            }).data
-        return Response({"movie": movie})
-
-    elif request.method == 'POST':
+    if request.method == 'POST':
         movie_serializer = MovieSerializer(data=request.data)
         if movie_serializer.is_valid():
             movie_serializer.save()
@@ -77,12 +68,26 @@ class UserAuthToken(ObtainAuthToken):
         user=serializer.validated_data['user']
         token, created=Token.objects.get_or_create(user=user)
         return Response({
-            #'token':token.key,
+           # 'token':token.key,
             'user_id':user.pk,
             'username':user.username,
             'message':"Login Successfully",
             'status':"200"
         })
+
+
+
+@api_view(['POST'])
+def favorite_movies(request):
+     if request.method == 'POST':
+        data = request.data
+        movie = MovieSerializer(
+            Movie.objects.filter(user=data['id']),
+            many=True,
+            context={
+                "request": request
+            }).data
+        return Response({"movie": movie})
 
 
 
