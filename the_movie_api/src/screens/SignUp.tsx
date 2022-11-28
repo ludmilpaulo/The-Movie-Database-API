@@ -28,7 +28,6 @@ function SignUp() {
         }),
       });
       let resJson = await res.json();
-      
 
       if (res.status === 200) {
         alert("Account Created Now you Can Add your favorite Movies");
@@ -107,7 +106,6 @@ function SignUp() {
                   type="password"
                   className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
                 />
-               
               </div>
             </div>
             <div className="mt-8">

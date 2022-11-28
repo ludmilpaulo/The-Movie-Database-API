@@ -2,12 +2,12 @@ import React from "react";
 import background from "../assets/bg.png";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { FiPhoneCall} from "react-icons/fi";
+import { FiPhoneCall } from "react-icons/fi";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { FcGlobe } from "react-icons/fc";
 import { AiOutlineGithub } from "react-icons/ai";
-import {CiFacebook} from "react-icons/ci";
-import {ImWhatsapp} from "react-icons/im";
+import { CiFacebook } from "react-icons/ci";
+import { ImWhatsapp } from "react-icons/im";
 
 const ContactScreen = () => {
   return (
@@ -21,95 +21,89 @@ const ContactScreen = () => {
         </h1>
 
         <div className="container px-6 mx-auto my-24">
-          
-                <div className="grid grid-cols-3 gap-4 place-content-evenly h-48 ...">
-                    
-                  <a href="tel:+27842368752">
-                    <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                      <div className="flex items-start">
-                        <div className="shrink-0">
-                          <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                            <FiPhoneCall className="w-12 h-12 text-white" />
-                          </div>
-                        </div>
-                        <div className="ml-6 grow">
-                          <p className="mb-1 font-bold">Technical support</p>
-
-                          <p className="text-gray-500">+27842368752</p>
-                        </div>
-                      </div>
+          <div className="grid grid-cols-3 gap-4 place-content-evenly h-48 ...">
+            <a href="tel:+27842368752">
+              <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex items-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <FiPhoneCall className="w-12 h-12 text-white" />
                     </div>
-                    </a>
-                    <a href="mailto:ludmilpaulo@gmail.com" >
-                    <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                      <div className="flex items-start">
-                        <div className="shrink-0">
-                          <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                            <MdOutlineMarkEmailUnread className="w-12 h-12 text-white" />
-                          </div>
-                        </div>
-                        <div className="ml-6 grow">
-                          <p className="mb-1 font-bold">Email</p>
-                          <p className="text-gray-500">ludmilpaulo@gmail.com</p>
-                        </div>
-                      </div>
-                    </div>
-                    </a>
-                    <a href="https://github.com/ludmilpaulo">
-                    <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                      <div className="flex align-start">
-                        <div className="shrink-0">
-                          <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                            <AiOutlineGithub className="w-12 h-12 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </a>
-                    <a href="https://www.ludmilpaulo.com/">
-                      <div className="w-full px-3 mb-12 lg:mb-0 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                        <div className="flex align-start">
-                          <div className="shrink-0">
-                            <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                              <FcGlobe className="w-12 h-12 text-white" />
-                            </div>
-                          </div>
-                          <div className="ml-6 grow">
-                            <p className="mb-1 font-bold">Bug report</p>
-                            <p className="text-gray-500">www.ludmilpaulo.com</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a href="https://www.facebook.com/ludmilpaulo">
-                      <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                      <div className="flex align-start">
-                        <div className="shrink-0">
-                          <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                            <CiFacebook className="w-12 h-12 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </a>
-
-                     <a href="https://api.whatsapp.com/send?phone=0027842368752">
-                      <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
-                      <div className="flex align-start">
-                        <div className="shrink-0">
-                          <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
-                            <ImWhatsapp className="w-12 h-12 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </a>
-
-                    
-
                   </div>
-                  
+                  <div className="ml-6 grow">
+                    <p className="mb-1 font-bold">Technical support</p>
+
+                    <p className="text-gray-500">+27842368752</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="mailto:ludmilpaulo@gmail.com">
+              <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex items-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <MdOutlineMarkEmailUnread className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                  <div className="ml-6 grow">
+                    <p className="mb-1 font-bold">Email</p>
+                    <p className="text-gray-500">ludmilpaulo@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="https://github.com/ludmilpaulo">
+              <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex align-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <AiOutlineGithub className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="https://www.ludmilpaulo.com/">
+              <div className="w-full px-3 mb-12 lg:mb-0 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex align-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <FcGlobe className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                  <div className="ml-6 grow">
+                    <p className="mb-1 font-bold">Bug report</p>
+                    <p className="text-gray-500">www.ludmilpaulo.com</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://www.facebook.com/ludmilpaulo">
+              <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex align-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <CiFacebook className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://api.whatsapp.com/send?phone=0027842368752">
+              <div className="w-full px-3 mb-12 grow-0 shrink-0 basis-auto md:w-6/12 lg:w-full xl:w-6/12 md:px-6 xl:px-12">
+                <div className="flex align-start">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center p-4 bg-gray-900 rounded-md shadow-md w-14 h-14">
+                      <ImWhatsapp className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
 

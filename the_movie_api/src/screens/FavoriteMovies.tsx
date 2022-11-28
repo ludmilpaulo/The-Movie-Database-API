@@ -22,23 +22,21 @@ interface Movie {
 const FavoriteMovies = () => {
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
 
-
-  
-  
   const getMovie = async () => {
     const authDataString = localStorage.getItem("user");
 
-    const authData = JSON.parse(authDataString || "");
+    const authData = Object(authDataString || "");
+    let userId = JSON.parse(authData);
 
     try {
-      fetch(`https://maindo.pythonanywhere.com/movies/`,{
+      fetch(`https://maindo.pythonanywhere.com/movies/`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id:authData.user_id,
+          id: userId.user_id,
         }),
       })
         .then((response) => response.json())

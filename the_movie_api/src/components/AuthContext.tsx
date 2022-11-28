@@ -20,8 +20,10 @@ const AuthProvider = ({ children }: IProps) => {
   // Get current auth state from AsyncStorage
   const getAuthState = async () => {
     const authDataString = await localStorage.getItem("user");
+    const authData = Object(authDataString || "");
+    // let userId = JSON.parse(authData);
 
-    const authData = JSON.parse(authDataString || "");
+    // const authData = JSON.parse(authDataString || "");
 
     setAuthState(authData);
 

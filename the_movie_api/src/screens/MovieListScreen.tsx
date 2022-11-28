@@ -8,8 +8,6 @@ import { Button } from "react-bootstrap";
 import { GrChapterNext, GrChapterPrevious } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
 
-
-
 interface Movie {
   id: string;
   title: string;
@@ -29,52 +27,56 @@ const MovieListScreen = () => {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState<Movie[]>([]);
 
-
   const [currentPage, setCurrentPage] = useState(0);
 
   const [page, setPage] = useState(1);
 
+  const [userAuth, setUserAuth] = useState<User>();
 
+  useEffect(() => {
+    const authDataString = localStorage.getItem("user");
 
-  
+    const authData = JSON.stringify(authDataString);
+    let userId = JSON.parse(authData);
+    setUserAuth(userId);
+  }, []);
+
   const nextPage = () => {
-    if(page === 0){
-      setPage(1)
+    if (page === 0) {
+      setPage(1);
     }
-    if(page >= 6){
-      setPage(1)
+    if (page >= 6) {
+      setPage(1);
+    } else {
+      setPage(page + 1);
+      getMovie();
+      console.log("page up ==>", page);
     }
-    else{
-    setPage(page + 1);
-    getMovie();
-    console.log("page up ==>", page);
-  }
   };
 
   const previousPage = () => {
-    if(page == 6){
-      setPage(1)
+    if (page == 6) {
+      setPage(1);
     }
     if (page >= 1) {
       setPage(page - 1);
       getMovie();
       console.log("page down ==>", page);
     }
-    if(page === 0){
-      setPage(5)
+    if (page === 0) {
+      setPage(5);
     }
   };
 
   let handleSubmit = async (movie: Movie) => {
     const authDataString = localStorage.getItem("user");
-
-    const authData = JSON.parse(authDataString || "");
-
-   
     if (authDataString === null) {
       alert("Please log in to Add your favorite Movie");
       navigate("/SignIn/");
     } else {
+      const authData = Object(authDataString || "");
+      let userId = JSON.parse(authData);
+
       try {
         let res = await fetch("https://maindo.pythonanywhere.com/get/", {
           method: "POST",
@@ -87,7 +89,7 @@ const MovieListScreen = () => {
             title: movie.title,
             release_date: movie.release_date,
             poster_path: movie.poster_path,
-            user: authData.user_id
+            user: userId.user_id,
           }),
         });
         let resJson = await res.json();
@@ -112,9 +114,8 @@ const MovieListScreen = () => {
       )
         .then((response) => response.json())
         .then((responseJson) => {
-        
           setFilteredDataSource(responseJson?.results);
-      
+
           setCurrentPage(responseJson?.page);
         })
         .catch(function (error) {
@@ -132,18 +133,21 @@ const MovieListScreen = () => {
 
   //***************************************************************** */
 
-  let handle = async (e:any) => {
+  let handle = async (e: any) => {
     try {
-      let res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=6802651e847439a9b1d064176b06c639&query=${e.target.value}`, {
-        method: "GET",
-      });
+      let res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=6802651e847439a9b1d064176b06c639&query=${e.target.value}`,
+        {
+          method: "GET",
+        }
+      );
       let resJson = await res.json();
       console.log("recebido", resJson);
 
       if (res.status === 200) {
         setFilteredDataSource(resJson?.results);
         setCurrentPage(resJson?.page);
-        
+
         //navigate("/");
       } else {
         alert(resJson);
@@ -155,8 +159,8 @@ const MovieListScreen = () => {
 
   //////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-  const searchMovie = (e:any) => {
-   // e.preventDefault();
+  const searchMovie = (e: any) => {
+    // e.preventDefault();
 
     setSearch(e.target.value);
 
@@ -166,15 +170,15 @@ const MovieListScreen = () => {
       )
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log("debug", responseJson?.results)
-          if(responseJson?.results===undefined){
-            alert("No movies found ")
+          console.log("debug", responseJson?.results);
+          if (responseJson?.results === undefined) {
+            alert("No movies found ");
             navigate("/");
-          }else{
-     
-          setFilteredDataSource(responseJson?.results);
-       
-          setCurrentPage(responseJson?.page);}
+          } else {
+            setFilteredDataSource(responseJson?.results);
+
+            setCurrentPage(responseJson?.page);
+          }
         })
         .catch(function (error) {
           navigate("/");
@@ -186,7 +190,6 @@ const MovieListScreen = () => {
     }
   };
 
-  
   //**************************************************************************** */
   useEffect(() => {
     // searchFilterFunction();
@@ -199,7 +202,7 @@ const MovieListScreen = () => {
       <div className="container px-4 mx-auto my-12 md:px-12">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <FiSearch ></FiSearch>
+            <FiSearch></FiSearch>
           </div>
           <input
             value={search}

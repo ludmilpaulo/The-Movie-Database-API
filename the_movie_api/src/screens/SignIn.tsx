@@ -69,7 +69,6 @@ function SignIn() {
             </Link>
 
             <div>
-             
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -82,7 +81,6 @@ function SignIn() {
                 Password
               </label>
               <div className="relative flex items-center justify-center">
-           
                 <input
                   value={password}
                   placeholder="Enter your password"
@@ -90,7 +88,6 @@ function SignIn() {
                   type="password"
                   className="w-full py-3 pl-3 mt-2 text-xs font-medium leading-none text-gray-800 bg-gray-200 border rounded focus:outline-none"
                 />
-               
               </div>
             </div>
             <div className="mt-8">

@@ -17,22 +17,21 @@ export default function Navbar() {
   const [user, setUser] = useState<User>();
 
   const logOut = () => {
+    console.log("user out");
     localStorage.removeItem("user");
     navigate("/");
   };
 
-  const getAuthState = async () => {
-    const authDataString = await localStorage.getItem("user");
+  useEffect(() => {
+    const authDataString = localStorage.getItem("user");
 
-    const authData = JSON.parse(authDataString || "");
-
-    setUser(authData);
-  };
+    const authData = JSON.stringify(authDataString);
+    let userfav = JSON.parse(authData);
+    setUser(userfav);
+  }, [user]);
 
   // Set current auth state in AsyncStorage
-  useEffect(() => {
-    getAuthState();
-  }, [user]);
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-900 text-white mb-3">
